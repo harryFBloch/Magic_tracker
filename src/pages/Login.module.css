@@ -1,0 +1,23 @@
+.pageContainer {
+  align-items: center;
+  padding-top: 20%;
+}
+
+.formContainer {
+  width: 320px;
+}
+
+.centerContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.linkStyle {
+  text-decoration: underline;
+  color: blue;
+}
+
+.topPadding {
+  padding-top: 16px;
+}

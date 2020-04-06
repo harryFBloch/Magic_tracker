@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet } from '@ionic/react';
+import { IonApp, IonRouterOutlet, IonContent } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
+import { Provider } from 'react-redux';
+import firebase from './config/firebaseConfig';
+import 'firebase/auth';
 import Home from './pages/Home';
+import Login from './pages/Login';
+import store, { actions } from './store';
+import { PrivateRoute, PublicRoute } from './utils/routing';
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -23,15 +30,41 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonRouterOutlet>
-        <Route path="/home" component={Home} exact={true} />
-        <Route exact path="/" render={() => <Redirect to="/home" />} />
-      </IonRouterOutlet>
-    </IonReactRouter>
-  </IonApp>
-);
+interface ComponentProps {
+  children: Array<ReactElement>;
+}
+
+const App = (): ReactElement => {
+  
+  useEffect((): void => {
+    //check auth status
+    firebase.auth().onAuthStateChanged((user): void => {
+      if (user) {
+        actions.auth.autoLoginSuccess(user.uid)(store.dispatch, store.getState, null);
+        if (window.location.pathname === '/login'){
+          window.location.assign('/home')
+        }
+      } else {
+        actions.auth.autoLoginFailed()(store.dispatch, store.getState, null);
+      }
+    })
+  }, [])
+
+  return (
+    <Provider store={store}>
+      <IonApp>
+        <IonReactRouter>
+          <IonContent id="content">
+            <IonRouterOutlet>
+              <PrivateRoute component={Home} path="/home" />
+              <PublicRoute component={Login} path="/Login" />
+              <Route exact path="/" render={() => <Redirect to="/home" />} />
+            </IonRouterOutlet>
+          </IonContent>
+        </IonReactRouter>
+      </IonApp>
+  </Provider>
+  );
+};
 
 export default App;
