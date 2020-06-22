@@ -1,3 +1,49 @@
 ion-content ion-toolbar {
   --background: translucent;
 }
+
+.game-container {
+  width: 100%;
+  height: 100%;
+  background-color: var(--ion-color-primary);
+  overflow: hidden;
+  padding-bottom: 50px;
+}
+
+.break {
+  border-top: var(--ion-color-secondary) 2px solid;
+}
+
+.button-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-container {
+  width: 90%;
+  padding: 16px;
+  border: solid 3px var(--ion-color-secondary);
+  border-radius: 25px;
+}
+
+.start-game-button {
+  width: 100%;
+  display: flex;
+  color: var(--ion-color-primary);
+  margin-top: 16px;
+}
+
+.skull-icon {
+  width: 42px;
+  height: 42px;
+}
+
+.home-text {
+  width: 100%;
+  text-align: center;
+  color: var(--ion-color-secondary);
+  font-weight: bold;
+  padding: 16px;
+  margin: 0;
+}

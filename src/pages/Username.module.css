@@ -1,0 +1,21 @@
+.pageContainer {
+display: flex;
+justify-content: center;
+align-items: center;
+width: 100%;
+}
+
+.inputContainer {
+  width: 100%;
+}
+
+.buttonContianer {
+  width: 100%;
+  justify-content: center;
+}
+
+.errorNote {
+  font-size: 10px;
+  text-align: center;
+  color: var(--ion-color-primary);
+}

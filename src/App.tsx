@@ -1,14 +1,23 @@
 import React, { ReactElement, useEffect } from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, IonContent } from '@ionic/react';
+import { IonApp, IonRouterOutlet, IonContent, setupConfig, isPlatform } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Provider } from 'react-redux';
-import firebase from './config/firebaseConfig';
+import firebase, { AdMobBannerIOS } from './config/firebaseConfig';
 import 'firebase/auth';
+
+import { Plugins } from '@capacitor/core';
+import { AdOptions, AdSize, AdPosition } from '@rdlabo/capacitor-admob';
+
 import Home from './pages/Home';
+import GameView from './pages/GameView';
+import AddDeck from './pages/AddDeck'
 import Login from './pages/Login';
+import DeckStats from './pages/DeckStats';
+
 import store, { actions } from './store';
 import { PrivateRoute, PublicRoute } from './utils/routing';
+import './App.css'
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -29,12 +38,46 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import LeftMenu from './components/LeftMenu';
+import Username from './pages/Username';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
+
+const { AdMob } = Plugins;
 
 interface ComponentProps {
   children: Array<ReactElement>;
 }
 
 const App = (): ReactElement => {
+
+  setupConfig({ swipeBackEnabled: false })
+
+  AdMob.initialize();
+
+  const addID = {
+    ios: AdMobBannerIOS,
+    android: ''
+  }
+
+  const platformAdId = isPlatform('android') ? addID.android : addID.ios;
+
+  const options: AdOptions = {
+    adId: platformAdId,
+    adSize: AdSize.BANNER,
+    position: AdPosition.BOTTOM_CENTER,
+    margin: 0
+  }
+
+  AdMob.showBanner(options)
+
+  AdMob.addListener('onAdLoaded', (info: boolean) => {
+    console.log('banner ad loaded')
+  })
+
+  AdMob.addListener('onAdSize' , (info: boolean) => {
+    console.log(info, 'here')
+  })
   
   useEffect((): void => {
     //check auth status
@@ -50,20 +93,28 @@ const App = (): ReactElement => {
     })
   }, [])
 
+
   return (
     <Provider store={store}>
       <IonApp>
         <IonReactRouter>
-          <IonContent id="content">
-            <IonRouterOutlet>
+          <IonContent id="main" forceOverscroll={false}>
+            <LeftMenu />
+            <IonRouterOutlet draggable={false}>
+              <PrivateRoute component={GameView} path="/game" />
               <PrivateRoute component={Home} path="/home" />
+              <PrivateRoute component={Username} path="/username"/>
+              <PrivateRoute component={AddDeck} path="/add_deck" />
+              <PrivateRoute component={DeckStats} path="/deck/:deckID" />
               <PublicRoute component={Login} path="/Login" />
+              <PublicRoute component={Privacy} path="/privacy"/>
+              <PublicRoute component={Terms} path="/terms"/>
               <Route exact path="/" render={() => <Redirect to="/home" />} />
             </IonRouterOutlet>
           </IonContent>
         </IonReactRouter>
-      </IonApp>
-  </Provider>
+       </IonApp>
+    </Provider>
   );
 };
 

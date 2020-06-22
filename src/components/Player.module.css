@@ -1,0 +1,65 @@
+.playerContainer {
+  width: 100%;
+  height: 50%;
+  background-color: var(--ion-color-primary);
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+  align-items: center;
+}
+
+.scoreCounter {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: var(--ion-color-secondary);
+  margin: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.playerName {
+  width: 100%;
+  text-align: center;
+  color: var(--ion-color-secondary);
+}
+
+.scoreText {
+  color: var(--ion-color-primary);
+  font-size: 22px;
+  font-weight: bold;
+  z-index: 1;
+}
+
+.flippedPlayer {
+  -webkit-transform:rotate(180deg);
+    -moz-transform:rotate(180deg);
+    -o-transform:rotate(180deg);
+    -ms-transform:rotate(180deg);
+    transform:rotate(180deg);
+}
+
+.cloneCircleContainer {
+  z-index: -1;
+}
+
+.circle{
+  animation: scaleIn 2s cubic-bezier(.36, .11, .89, .32);
+}
+
+.circleClone {
+  position: absolute;
+  opacity: 0;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(1, 1);
+    opacity: .5;
+  }
+  to {
+    transform: scale(2, 2);
+    opacity: 0;
+  }
+}

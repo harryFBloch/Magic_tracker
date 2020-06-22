@@ -1,0 +1,53 @@
+.statRect {
+  fill:none;
+  stroke: var(--ion-color-primary);
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width:32px
+}
+
+.icons {
+  height: 32px;
+  width: 32px;
+  margin-right: 6px;
+}
+
+.itemContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 6px;
+  background-color: var(--ion-color-secondary);
+}
+
+.selectedColor {
+  background-color: var(--ion-color-primary);
+  stroke: var(--ion-color-secondary);
+}
+
+.toolbar {
+  --border-width: 0 0 0 0 !important;
+  border: none;
+}
+
+.menuButton {
+  width: 100%;
+  color: var(--ion-color-secondary);
+  font-weight: bold;
+  --border-radius: 50px;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-top: 8px;
+}
+
+.scanIcon {
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width:32px;
+}
+
+.background {
+  background-color: var(--ion-color-secondary);
+  pointer-events: all;
+}

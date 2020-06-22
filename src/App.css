@@ -1,0 +1,8 @@
+.alert-wrapper {
+  --background: var(--ion-color-primary);
+}
+ .alert-wrapper span, .alert-title, .alert-message {
+  color: var(--ion-color-secondary) !important;
+ }
+
+ 
