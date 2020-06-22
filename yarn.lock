@@ -984,10 +984,17 @@
   dependencies:
     tslib "^1.9.0"
 
-"@capacitor/ios@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-2.0.2.tgz#3736af5a444804686fc1bd98aaea59f33287c6ff"
-  integrity sha512-z4erWGR0+ivZDDPXyM+qCTpcP7ewuIWEgBtyTn1xiV/favPsbnOdeUbWlKE+inZxvT7aAAT+rDH3kMbq1e0WSA==
+"@capacitor/core@latest":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-2.2.0.tgz#60f7b2126a5a223cb1ede055a65df6ad0d719f4b"
+  integrity sha512-ClxXjOUCF0wZpznZI6f6uXK2LLzWBx5Ly/g7Hqu8R8wNdaKYoh83eMuT+m5G1gfxhcALAAJNUhHccnCW3ohftg==
+  dependencies:
+    tslib "^1.9.0"
+
+"@capacitor/ios@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-2.2.0.tgz#e9fbf2cf1404fd08b251b7a63380f2ac199b912e"
+  integrity sha512-mMz09NG7PYygoAtPJEBRiCjANHRfFT5WcTrFxILRYsgrLct4LhZ7ejaj9En3NGCvwnTG/J+89U2nxxlw2WisOw==
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
@@ -1277,13 +1284,6 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@ionic-native/admob-free@^5.26.0":
-  version "5.26.0"
-  resolved "https://registry.yarnpkg.com/@ionic-native/admob-free/-/admob-free-5.26.0.tgz#064bb81f0242b6f037a75f38a4f08882a2238bae"
-  integrity sha512-4UJAQu/mgT6KggC0Z+Cavn1Q8l+vSMeJMBW3Ev0gg+3a2qf4oysaZ2n+aefOz8nTFAtpIFkwXEHkenlopTJglQ==
-  dependencies:
-    "@types/cordova" latest
-
 "@ionic-native/barcode-scanner@^5.24.0":
   version "5.24.0"
   resolved "https://registry.yarnpkg.com/@ionic-native/barcode-scanner/-/barcode-scanner-5.24.0.tgz#18b6cee3c16927c26d4c15d976c8f065c06e0182"
@@ -1545,6 +1545,13 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
+
+"@rdlabo/capacitor-admob@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@rdlabo/capacitor-admob/-/capacitor-admob-1.0.4.tgz#33c32a838cdcd532f6ea3b5c577b935cca1536c0"
+  integrity sha512-Woyd8j5IPobOBANi8mtLXNhM2ghB4nVuBosJz8apvXt2Yhw9Z/KbTEpc+c45PT7zsqDDfPbppHffOSNrvIolBw==
+  dependencies:
+    "@capacitor/core" latest
 
 "@sheerun/mutationobserver-shim@^0.3.2":
   version "0.3.3"
@@ -3487,16 +3494,6 @@ copy-descriptor@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
-
-cordova-admob-sdk@^0.24.1:
-  version "0.24.1"
-  resolved "https://registry.yarnpkg.com/cordova-admob-sdk/-/cordova-admob-sdk-0.24.1.tgz#bf2453d0254d02f4b48b8fe8a5fd4530ae4f1ef9"
-  integrity sha512-gz9h9E/opydsq3nCB2vL40Miy7KG7gcmhkvY1WqiHb015PpaLr50pgmUNBKCTW3/J6Vn+xNcCHPRiJIZLUMX9Q==
-
-cordova-plugin-admob-free@^0.27.0:
-  version "0.27.0"
-  resolved "https://registry.yarnpkg.com/cordova-plugin-admob-free/-/cordova-plugin-admob-free-0.27.0.tgz#1f695043a2ef3545a9457bab624c196f02f32ec2"
-  integrity sha512-4QP89i3maFivk2GN8uAfaPDjwSAwvfrxkJu6pV1+ZJbPSAlp1OhNeXUbXXK8VXNNkoEWqLFQ2TCU1c09ybdATQ==
 
 cordova-promise-polyfill@^0.0.2:
   version "0.0.2"
@@ -11255,9 +11252,9 @@ websocket-driver@>=0.5.1:
     websocket-extensions ">=0.1.1"
 
 websocket-extensions@>=0.1.1:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/websocket-extensions/-/websocket-extensions-0.1.3.tgz#5d2ff22977003ec687a4b87073dfbbac146ccf29"
-  integrity sha512-nqHUnMXmBzT0w570r2JpJxfiSD1IzoI+HGVdd3aZ0yNi3ngvQ4jv1dtHt5VGxfI2yj5yqImPhOK4vmIh2xMbGg==
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/websocket-extensions/-/websocket-extensions-0.1.4.tgz#7f8473bc839dfd87608adb95d7eb075211578a42"
+  integrity sha512-OqedPIGOfsDlo31UNwYbCFMSaO9m9G/0faIHj5/dZFDMFqPTcx6UwqyOy3COEaEOg/9VsGIpdqn62W5KhoKSpg==
 
 whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.3, whatwg-encoding@^1.0.5:
   version "1.0.5"
