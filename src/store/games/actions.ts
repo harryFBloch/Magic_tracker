@@ -59,6 +59,11 @@ const sendGameDataToFirebase = (getState: () => RootState, win: boolean): Promis
   .catch((error): Promise<void> => Promise.reject(error));
 }
 
+export const gameOverReset = (): ThunkResult<Promise<void>> =>
+async ( dispatch: ThunkDispatchType): Promise<void> => {
+  dispatch({type: ActionType.END_GAME_RESET});
+}
+
 export const gameOver = (win: boolean): ThunkResult<Promise<void>> =>
 async ( dispatch: ThunkDispatchType, getState: () => RootState ): Promise<void> => {
   const currentGame = getState().games.currentGame;
@@ -69,11 +74,6 @@ async ( dispatch: ThunkDispatchType, getState: () => RootState ): Promise<void> 
   } else {
     dispatch({type: ActionType.GAME_OVER, win: win});
   }
-}
-
-export const gameOverReset = (): ThunkResult<Promise<void>> =>
-async ( dispatch: ThunkDispatchType): Promise<void> => {
-  dispatch({type: ActionType.END_GAME_RESET});
 }
 
 export const rematch = (): ThunkResult<Promise<void>> =>

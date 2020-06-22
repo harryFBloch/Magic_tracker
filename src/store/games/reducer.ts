@@ -20,7 +20,7 @@ export default function auth(state=initialState, action: RootAction): typeof ini
 
     case (ActionType.START_GAME):
       return {...state, 
-        currentGame: {...state.currentGame, gameStarted: true, deckID: action.deckID, justPlay: action.justPlay}}
+        currentGame: {...state.currentGame, gameStarted: true, deckID: action.deckID, justPlay: action.justPlay, myScore: 20, opponentScore: 20}}
 
     case (ActionType.GAME_OVER):
       return {...state, currentGame: {...state.currentGame, gameStarted: false, win: action.win}}
