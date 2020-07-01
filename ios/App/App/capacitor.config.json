@@ -1,12 +1,13 @@
 {
-  "appId": "io.ionic.starter",
+  "appId": "com.MtG.Tracker",
   "appName": "mtg-tracker",
   "bundledWebRuntime": false,
   "npmClient": "yarn",
-  "webDir": "public",
+  "webDir": "build",
   "cordova": {},
-  "server": {
-    "url": "http://192.168.1.33:8101",
-    "originalUrl": "http://192.168.1.151:8101"
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 5000
+    }
   }
 }
