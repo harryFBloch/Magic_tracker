@@ -49,9 +49,7 @@ export const LeftMenu = ({ decks, getDecks, userLoading, selectedDeck, selectDec
   useEffect((): void => {
     if (!userLoading && uid !== '') {
       getDecks()
-      .catch((error) => {
-        history.push('/add_deck')
-      })
+      
       getGames();
       getUsername()
       .catch((error) => {

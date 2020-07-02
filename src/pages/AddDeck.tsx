@@ -2,13 +2,20 @@ import React, { ReactElement, useState } from 'react';
 import { IonPage, IonItem, IonInput, IonContent, IonTextarea, IonButton } from '@ionic/react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { ThunkDispatchType, actions } from '../store';
+import { ThunkDispatchType, actions, RootState } from '../store';
 import { Deck } from '../store/decks/types';
 import Toolbar from '../components/common/Toolbar';
 import { deckTemplate } from '../store/decks/types';
 import classes from './AddDeck.module.css';
 
 
+interface ReduxStateProps {
+  decks: Deck[]
+};
+
+const mapStateToProps = (state: RootState): ReduxStateProps => ({
+  decks: state.decks.decks
+});
 // Need to define types here because it won't infer properly from ThunkResult right now
 interface ReduxDispatchProps {
   addNewDeck: (deck: Deck) => Promise<void>;
@@ -19,11 +26,10 @@ const mapDispatchToProps = (dispatch: ThunkDispatchType): ReduxDispatchProps => 
 }, dispatch);
 
 
+type Props = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mapStateToProps>
 
-type Props = ReturnType<typeof mapDispatchToProps>
 
-
-export const AddDeck = ({ addNewDeck }: Props): ReactElement => {
+export const AddDeck = ({ addNewDeck, decks }: Props): ReactElement => {
 
   const [deckName, setDeckName] = useState("");
   const [deckDesc, setDeckDesc] = useState("");
@@ -31,19 +37,21 @@ export const AddDeck = ({ addNewDeck }: Props): ReactElement => {
 
   const handleChange = (setAttribute: (newValue: string) => void, value: string) => {
     setAttribute(value)
+    console.log(decks)
   }
 
   const handleAddNewDeck = (): void => {
-    const newDeck = deckTemplate;
-    newDeck.name = deckName;
-    newDeck.description = deckDesc;
-    newDeck.notes = deckDesc;
+    const newDeck: Deck = {name: deckName, 
+      description: deckDesc, notes: deckNotes, wins: 0, losses: 0, id: decks.length, gameHistory: []};
     addNewDeck(newDeck)
+    setDeckName('');
+    setDeckDesc('');
+    setDeckNotes('');
   }
 
   return (
     <IonPage>
-      <Toolbar back={true}/>
+      <Toolbar back={true} blank={decks.length === 0 ? true : false}/>
       <IonContent color="secondary">
         <div className={classes.title}>Add A New Deck</div>
         <IonItem color="secondary" lines="none" className={classes.inputContainer}>
@@ -71,4 +79,4 @@ export const AddDeck = ({ addNewDeck }: Props): ReactElement => {
   )
 }
 
-export default connect(null, mapDispatchToProps)(AddDeck)
+export default connect(mapStateToProps, mapDispatchToProps)(AddDeck)

@@ -14,6 +14,7 @@ import GameView from './pages/GameView';
 import AddDeck from './pages/AddDeck'
 import Login from './pages/Login';
 import DeckStats from './pages/DeckStats';
+import Onboarding from './pages/Onboarding';
 
 import store, { actions } from './store';
 import { PrivateRoute, PublicRoute } from './utils/routing';
@@ -106,6 +107,7 @@ const App = (): ReactElement => {
               <PrivateRoute component={GameView} path="/game" />
               <PrivateRoute component={Home} path="/home" />
               <PrivateRoute component={Username} path="/username"/>
+              <PrivateRoute component={Onboarding} path="/onboarding"/>
               <PrivateRoute component={AddDeck} path="/add_deck" />
               <PrivateRoute component={DeckStats} path="/deck/:deckID" />
               <PublicRoute component={Login} path="/Login" />

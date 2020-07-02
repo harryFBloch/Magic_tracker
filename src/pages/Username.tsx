@@ -31,7 +31,7 @@ export const Username = ({ registerUsername, history }: Props): ReactElement => 
   const handleSubmitUsername = (): void => {
     registerUsername(username)
     .then(() => {
-      history.push('/add_deck')
+      history.push('/onboarding')
     })
     .catch((error) => {
       console.log('handlesubmit username', error);
@@ -43,7 +43,7 @@ export const Username = ({ registerUsername, history }: Props): ReactElement => 
     <IonPage className={classes.pageContainer}>
       <div className={`${classes.formContainer} ${classes.verticalCenter}`}>
           <IonItem>
-            <IonLabel position="floating">Username</IonLabel>
+            <IonLabel position="floating">Enter A Username</IonLabel>
             <IonInput value={username} onIonChange={(event) => setUsername(String(event.detail.value))} autoCapitalize="words"/>
           </IonItem>
         <div className={`${classes.centerContainer} ${classes.topPadding}`}>

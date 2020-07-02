@@ -10,7 +10,6 @@ const initialState = {
 export default function auth(state=initialState, action: RootAction): typeof initialState  {
   switch (action.type) {
 
-  
     case (ActionType.ADD_DECK):
       return {...state, decks: [...state.decks, action.deck]}
 

@@ -9,7 +9,6 @@ import { Deck } from './types';
 
 export const addDeck = (deck: Deck): ThunkResult<Promise<void>> =>
 async ( dispatch: ThunkDispatchType, getState: () => RootState ): Promise<void> => {
-  deck.id = getState().decks.decks.length
   return firebase.database().ref(`/users/${getState().auth.uid}/decks/${deck.id}`).set(deck)
   .then((data): void => {
     dispatch({type: ActionType.ADD_DECK, deck: deck});
@@ -36,6 +35,7 @@ async ( dispatch: ThunkDispatchType, getState: () => RootState ): Promise<void> 
 
 export const selectDeck = (deck: Deck): ThunkResult<Promise<void>> =>
 async ( dispatch: ThunkDispatchType): Promise<void> => {
+  console.log('selecting')
   dispatch({type: ActionType.SELECT_DECK, deck: deck});
 }
 
