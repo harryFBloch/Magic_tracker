@@ -44,16 +44,17 @@ const Home = ({ selectedDeck, getDeckFromFirebase, history, startGame}: Props): 
     .then((data): void => {
       console.log(`Barcode data: ${data.text}`);
       let params = data.text.split(' ');
-      getDeckFromFirebase(params[0], params[1])
-      .then(() => {
+      console.log(params, "params");
+      if (params[1]) {
+        getDeckFromFirebase(params[0], params[1])
+        .then(() => {
         startGame();
         history.push('/game')
       })
+      }
     })
     .catch((error) => {
       console.log(error)
-      //for testing!!
-      getDeckFromFirebase('6xW2ac5GVfVZncSlEKWiiXMtqQ23', '0');
     })
   };
 
