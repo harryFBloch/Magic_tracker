@@ -5,7 +5,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import { Provider } from 'react-redux';
 import firebase, { AdMobBannerIOS } from './config/firebaseConfig';
 import 'firebase/auth';
-
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { Plugins } from '@capacitor/core';
 import { AdOptions, AdSize, AdPosition } from '@rdlabo/capacitor-admob';
 
@@ -80,6 +80,9 @@ const App = (): ReactElement => {
   AdMob.addListener('onAdSize' , (info: boolean) => {
     console.log(info, 'here')
   })
+
+  //lock app screen orientation
+  ScreenOrientation.lock(ScreenOrientation.ORIENTATIONS.PORTRAIT);
   
   useEffect((): void => {
     //check auth status
