@@ -65,9 +65,10 @@ const App = (): ReactElement => {
 
   const options: AdOptions = {
     adId: platformAdId,
-    adSize: AdSize.BANNER,
+    adSize: AdSize.FLUID,
     position: AdPosition.BOTTOM_CENTER,
-    margin: 0
+    margin: 0,
+    
   }
 
   AdMob.showBanner(options)
