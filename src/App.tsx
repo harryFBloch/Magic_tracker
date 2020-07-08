@@ -91,8 +91,7 @@ const App = (): ReactElement => {
       } else {
         actions.auth.autoLoginFailed()(store.dispatch, store.getState, null);
       }
-      Plugins.SplashScreen.hide()
-      console.log("\n\n\n\n\n\nIM HERE yes")
+      Plugins.SplashScreen.hide();
     })
   }, [])
 

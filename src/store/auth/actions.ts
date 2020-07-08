@@ -43,7 +43,6 @@ async ( dispatch: ThunkDispatchType): Promise<void> => {
 export const registerUsername = (username: string): ThunkResult<Promise<void>> =>
 async ( dispatch: ThunkDispatchType, getState: () => RootState ): Promise<void> => {
   const uid = getState().auth.uid
-  console.log('here')
   // firebase.database().ref(`/usernames/${uid}`).set(username)
   return firebase.database().ref(`/users/${uid}/username`).set(username)
   .then((data) => {

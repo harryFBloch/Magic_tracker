@@ -1,6 +1,7 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 import {withRouter, RouteComponentProps} from 'react-router-dom';
 import { IonPage, IonButton, IonAlert } from '@ionic/react';
+import { Insomnia } from '@ionic-native/insomnia';
 import { connect } from 'react-redux';
 import { RootState, Game, ThunkDispatchType, actions } from '../store';
 import Toolbar from '../components/common/Toolbar';
@@ -47,6 +48,15 @@ export const GameView = (
     Props): ReactElement => {
 
   const [gameSurrenderAlert, setGameSurrenderAlert] = useState(false);
+
+  //this is used to keep the phone awake while a game is in play.
+  useEffect(() => {
+    if(currentGame.gameStarted) {
+      Insomnia.keepAwake();
+    } else  {
+      Insomnia.allowSleepAgain();
+    }
+  }, [currentGame.gameStarted]);
 
   const handleEndGameSurrender = (): void => {
     setGameSurrenderAlert(true);
