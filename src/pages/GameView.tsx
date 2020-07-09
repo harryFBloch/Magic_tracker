@@ -10,6 +10,7 @@ import RenderSVG from '../components/common/RenderSVG';
 import { ICONS } from '../icons';
 import './Home.css';
 import { bindActionCreators } from 'redux';
+
 interface ReduxStateProps {
   currentGame: Game,
   username: string,
@@ -74,6 +75,7 @@ export const GameView = (
   const handleGameOver = (win: boolean): void => {
     gameAlertToggle();
     endGame(win);
+    showInterAd();
   }
 
   const handleRematch = (): void => {
