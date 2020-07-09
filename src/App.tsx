@@ -1,13 +1,12 @@
 import React, { ReactElement, useEffect } from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, IonContent, setupConfig, isPlatform } from '@ionic/react';
+import { IonApp, IonRouterOutlet, IonContent, setupConfig } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Provider } from 'react-redux';
-import firebase, { AdMobBannerIOS } from './config/firebaseConfig';
+import firebase from './config/firebaseConfig';
 import 'firebase/auth';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { Plugins } from '@capacitor/core';
-import { AdOptions, AdSize, AdPosition } from '@rdlabo/capacitor-admob';
 
 import Home from './pages/Home';
 import GameView from './pages/GameView';
@@ -46,8 +45,6 @@ import Username from './pages/Username';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 
-const { AdMob } = Plugins;
-
 interface ComponentProps {
   children: Array<ReactElement>;
 }
@@ -55,33 +52,6 @@ interface ComponentProps {
 const App = (): ReactElement => {
 
   setupConfig({ swipeBackEnabled: false })
-
-  // AdMob.initialize();
-
-  // const addID = {
-  //   ios: AdMobBannerIOS,
-  //   android: ''
-  // }
-
-  // const platformAdId = isPlatform('android') ? addID.android : addID.ios;
-
-  // const options: AdOptions = {
-  //   adId: platformAdId,
-  //   adSize: AdSize.FLUID,
-  //   position: AdPosition.BOTTOM_CENTER,
-  //   margin: 0,
-    
-  // }
-
-  // AdMob.showBanner(options)
-
-  // AdMob.addListener('onAdLoaded', (info: boolean) => {
-  //   console.log('banner ad loaded')
-  // })
-
-  // AdMob.addListener('onAdSize' , (info: boolean) => {
-  //   console.log(info, 'here')
-  // })
 
   //lock app screen orientation
   ScreenOrientation.lock(ScreenOrientation.ORIENTATIONS.PORTRAIT);

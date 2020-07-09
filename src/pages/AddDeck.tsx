@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { ThunkDispatchType, actions, RootState } from '../store';
 import { Deck } from '../store/decks/types';
 import Toolbar from '../components/common/Toolbar';
-import { deckTemplate } from '../store/decks/types';
 import classes from './AddDeck.module.css';
 
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { RootState, Game, Deck, actions, ThunkDispatchType } from '../store';
 import classes from './DeckStats.module.css';
 import { RouteComponentProps } from 'react-router';
-import { IonPage, IonContent, IonItem, IonLabel, IonTextarea, IonButton } from '@ionic/react';
+import { IonPage, IonContent, IonTextarea, IonButton } from '@ionic/react';
 import Toolbar from '../components/common/Toolbar';
 import Loading from '../components/common/Loading';
 import RenderSVG from '../components/common/RenderSVG';
