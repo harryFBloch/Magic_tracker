@@ -15,6 +15,8 @@ import AddDeck from './pages/AddDeck'
 import Login from './pages/Login';
 import DeckStats from './pages/DeckStats';
 import Onboarding from './pages/Onboarding';
+import AdMobContainer from './components/common/AdMobContainer';
+import InterAd from './components/common/InterAd';
 
 import store, { actions } from './store';
 import { PrivateRoute, PublicRoute } from './utils/routing';
@@ -54,32 +56,32 @@ const App = (): ReactElement => {
 
   setupConfig({ swipeBackEnabled: false })
 
-  AdMob.initialize();
+  // AdMob.initialize();
 
-  const addID = {
-    ios: AdMobBannerIOS,
-    android: ''
-  }
+  // const addID = {
+  //   ios: AdMobBannerIOS,
+  //   android: ''
+  // }
 
-  const platformAdId = isPlatform('android') ? addID.android : addID.ios;
+  // const platformAdId = isPlatform('android') ? addID.android : addID.ios;
 
-  const options: AdOptions = {
-    adId: platformAdId,
-    adSize: AdSize.FLUID,
-    position: AdPosition.BOTTOM_CENTER,
-    margin: 0,
+  // const options: AdOptions = {
+  //   adId: platformAdId,
+  //   adSize: AdSize.FLUID,
+  //   position: AdPosition.BOTTOM_CENTER,
+  //   margin: 0,
     
-  }
+  // }
 
-  AdMob.showBanner(options)
+  // AdMob.showBanner(options)
 
-  AdMob.addListener('onAdLoaded', (info: boolean) => {
-    console.log('banner ad loaded')
-  })
+  // AdMob.addListener('onAdLoaded', (info: boolean) => {
+  //   console.log('banner ad loaded')
+  // })
 
-  AdMob.addListener('onAdSize' , (info: boolean) => {
-    console.log(info, 'here')
-  })
+  // AdMob.addListener('onAdSize' , (info: boolean) => {
+  //   console.log(info, 'here')
+  // })
 
   //lock app screen orientation
   ScreenOrientation.lock(ScreenOrientation.ORIENTATIONS.PORTRAIT);
@@ -105,8 +107,11 @@ const App = (): ReactElement => {
       <IonApp>
         <IonReactRouter>
           <IonContent id="main" forceOverscroll={false}>
+          <AdMobContainer />
+          <InterAd/>
             <LeftMenu />
             <IonRouterOutlet draggable={false}>
+              
               <PrivateRoute component={GameView} path="/game" />
               <PrivateRoute component={Home} path="/home" />
               <PrivateRoute component={Username} path="/username"/>

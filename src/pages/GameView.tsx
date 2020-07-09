@@ -1,6 +1,6 @@
 import React, { ReactElement, useState, useEffect } from 'react';
 import {withRouter, RouteComponentProps} from 'react-router-dom';
-import { IonPage, IonButton, IonAlert } from '@ionic/react';
+import { IonPage, IonButton, IonAlert, isPlatform } from '@ionic/react';
 import { Insomnia } from '@ionic-native/insomnia';
 import { connect } from 'react-redux';
 import { RootState, Game, ThunkDispatchType, actions } from '../store';
@@ -10,7 +10,6 @@ import RenderSVG from '../components/common/RenderSVG';
 import { ICONS } from '../icons';
 import './Home.css';
 import { bindActionCreators } from 'redux';
-
 interface ReduxStateProps {
   currentGame: Game,
   username: string,
@@ -30,6 +29,7 @@ interface ReduxDispatchProps {
   gameOverReset: () => Promise<void>;
   gameRematch: () => Promise<void>;
   gameAlertToggle: () => Promise<void>;
+  showInterAd: () => Promise<void>;
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatchType): ReduxDispatchProps => bindActionCreators({
@@ -38,16 +38,19 @@ const mapDispatchToProps = (dispatch: ThunkDispatchType): ReduxDispatchProps => 
   setScore: actions.games.setScore,
   gameOverReset: actions.games.gameOverReset,
   gameRematch: actions.games.rematch,
-  gameAlertToggle: actions.games.gameOverAlertToggle
+  gameAlertToggle: actions.games.gameOverAlertToggle,
+  showInterAd: actions.flags.showInterAd
 }, dispatch);
 
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps> & RouteComponentProps
 
 export const GameView = (
-  { currentGame, username, endGame, setScore, history, gameOverReset, gameRematch, gameOverAlert, gameAlertToggle }: 
+  { currentGame, username, endGame, setScore, history, 
+    gameOverReset, gameRematch, gameOverAlert, gameAlertToggle, showInterAd }: 
     Props): ReactElement => {
 
   const [gameSurrenderAlert, setGameSurrenderAlert] = useState(false);
+
 
   //this is used to keep the phone awake while a game is in play.
   useEffect(() => {
@@ -65,6 +68,7 @@ export const GameView = (
   const handleSurrenderGameOver = (win: boolean): void => {
     history.push('/home');
     endGame(win);
+    showInterAd();
   }
 
   const handleGameOver = (win: boolean): void => {
@@ -73,12 +77,14 @@ export const GameView = (
   }
 
   const handleRematch = (): void => {
-    gameRematch()
+    gameRematch();
+    showInterAd();
   }
 
   const handleCancelGame = (): void => {
     history.push('/home')
     gameOverReset()
+    showInterAd()
   }
 
   const renderRightButton = (): ReactElement => {
