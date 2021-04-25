@@ -984,10 +984,17 @@
   dependencies:
     tslib "^1.9.0"
 
-"@capacitor/ios@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-2.0.2.tgz#3736af5a444804686fc1bd98aaea59f33287c6ff"
-  integrity sha512-z4erWGR0+ivZDDPXyM+qCTpcP7ewuIWEgBtyTn1xiV/favPsbnOdeUbWlKE+inZxvT7aAAT+rDH3kMbq1e0WSA==
+"@capacitor/core@latest":
+  version "2.4.7"
+  resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-2.4.7.tgz#f3b4d5728db7e764c1153da5e67d369bda35b772"
+  integrity sha512-ZPzXXQ4EPwR/ZhNDkmlxyzw4FvquIl/ROj8HMMM0MEd4xZfM8ulNGPIL6br9TWdlFLGBKq40eymPZjKaivGnig==
+  dependencies:
+    tslib "^1.9.0"
+
+"@capacitor/ios@^2.2.0":
+  version "2.4.7"
+  resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-2.4.7.tgz#03eecc5348d2ac84e62fc17ae37cc266bcc6a437"
+  integrity sha512-XKYU67ZM+yY4/vDJ3ZVfs+phjtWK8TcKwq75fGoxB9PKXuCmMi5bihPuA3Xs/sIFXuozpnaYnspp0eTRJ7bG0w==
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
@@ -1277,13 +1284,6 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@ionic-native/admob-free@^5.26.0":
-  version "5.26.0"
-  resolved "https://registry.yarnpkg.com/@ionic-native/admob-free/-/admob-free-5.26.0.tgz#064bb81f0242b6f037a75f38a4f08882a2238bae"
-  integrity sha512-4UJAQu/mgT6KggC0Z+Cavn1Q8l+vSMeJMBW3Ev0gg+3a2qf4oysaZ2n+aefOz8nTFAtpIFkwXEHkenlopTJglQ==
-  dependencies:
-    "@types/cordova" latest
-
 "@ionic-native/barcode-scanner@^5.24.0":
   version "5.24.0"
   resolved "https://registry.yarnpkg.com/@ionic-native/barcode-scanner/-/barcode-scanner-5.24.0.tgz#18b6cee3c16927c26d4c15d976c8f065c06e0182"
@@ -1295,6 +1295,20 @@
   version "5.24.0"
   resolved "https://registry.yarnpkg.com/@ionic-native/core/-/core-5.24.0.tgz#538e2623f3290982a9b1891a365d69ad83a9b481"
   integrity sha512-FHMrBFMioe5lIz7Yk03rWkQB+IaA2l0f96frGhhrduJGUtHokQcgxctSR2UlPFQ34wfILqsBGpj+c284RyeA2Q==
+  dependencies:
+    "@types/cordova" latest
+
+"@ionic-native/insomnia@^5.27.0":
+  version "5.32.1"
+  resolved "https://registry.yarnpkg.com/@ionic-native/insomnia/-/insomnia-5.32.1.tgz#1080be4afc5036a188ef6ce5c70e3c1c53793e7c"
+  integrity sha512-bKGjjgyKFKxQtHxUqf2qJGVBjXI39HM6DwxdjuyKGHQRxdf4N1W9MAGiojvJ/qGY9r12qUmhXjiGyo0UycDnLA==
+  dependencies:
+    "@types/cordova" latest
+
+"@ionic-native/screen-orientation@^5.27.0":
+  version "5.32.1"
+  resolved "https://registry.yarnpkg.com/@ionic-native/screen-orientation/-/screen-orientation-5.32.1.tgz#0ae851d209a709f73316544eedfefc14ec8addbb"
+  integrity sha512-gUi5s7bPY00m0PU82yy3m4cKnGQUNjFSkCUhWG88N03HEDZ2LnNhMLqM0cOLgYUzBCyJVrn0gS1XMOggHbkENQ==
   dependencies:
     "@types/cordova" latest
 
@@ -1545,6 +1559,13 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
+
+"@rdlabo/capacitor-admob@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@rdlabo/capacitor-admob/-/capacitor-admob-1.0.4.tgz#33c32a838cdcd532f6ea3b5c577b935cca1536c0"
+  integrity sha512-Woyd8j5IPobOBANi8mtLXNhM2ghB4nVuBosJz8apvXt2Yhw9Z/KbTEpc+c45PT7zsqDDfPbppHffOSNrvIolBw==
+  dependencies:
+    "@capacitor/core" latest
 
 "@sheerun/mutationobserver-shim@^0.3.2":
   version "0.3.3"
@@ -3488,15 +3509,15 @@ copy-descriptor@^0.1.0:
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
 
-cordova-admob-sdk@^0.24.1:
-  version "0.24.1"
-  resolved "https://registry.yarnpkg.com/cordova-admob-sdk/-/cordova-admob-sdk-0.24.1.tgz#bf2453d0254d02f4b48b8fe8a5fd4530ae4f1ef9"
-  integrity sha512-gz9h9E/opydsq3nCB2vL40Miy7KG7gcmhkvY1WqiHb015PpaLr50pgmUNBKCTW3/J6Vn+xNcCHPRiJIZLUMX9Q==
+cordova-plugin-insomnia@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-insomnia/-/cordova-plugin-insomnia-4.3.0.tgz#832a33f6d763f0b80273bdf761b35b678c43b957"
+  integrity sha1-gyoz9tdj8LgCc733YbNbZ4xDuVc=
 
-cordova-plugin-admob-free@^0.27.0:
-  version "0.27.0"
-  resolved "https://registry.yarnpkg.com/cordova-plugin-admob-free/-/cordova-plugin-admob-free-0.27.0.tgz#1f695043a2ef3545a9457bab624c196f02f32ec2"
-  integrity sha512-4QP89i3maFivk2GN8uAfaPDjwSAwvfrxkJu6pV1+ZJbPSAlp1OhNeXUbXXK8VXNNkoEWqLFQ2TCU1c09ybdATQ==
+cordova-plugin-screen-orientation@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-screen-orientation/-/cordova-plugin-screen-orientation-3.0.2.tgz#81290a933cfe84d35482cfcb251c931cc7b71931"
+  integrity sha512-2w6CMC+HGvbhogJetalwGurL2Fx8DQCCPy3wlSZHN1/W7WoQ5n9ujVozcoKrY4VaagK6bxrPFih+ElkO8Uqfzg==
 
 cordova-promise-polyfill@^0.0.2:
   version "0.0.2"
@@ -10271,9 +10292,9 @@ sshpk@^1.7.0:
     tweetnacl "~0.14.0"
 
 ssri@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/ssri/-/ssri-6.0.1.tgz#2a3c41b28dd45b62b63676ecb74001265ae9edd8"
-  integrity sha512-3Wge10hNcT1Kur4PDFwEieXSCMCJs/7WvSACcrMYrNp+b8kDL1/0wJch5Ni2WrtwEa2IO8OsVfeKIciKCDx/QA==
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/ssri/-/ssri-6.0.2.tgz#157939134f20464e7301ddba3e90ffa8f7728ac5"
+  integrity sha512-cepbSq/neFK7xB6A50KHN0xHDotYzq58wWCa5LeWqnPrHG8GzfEjO/4O8kpmcGW+oaxkvhEJCWgbgNk4/ZV93Q==
   dependencies:
     figgy-pudding "^3.5.1"
 
