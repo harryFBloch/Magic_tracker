@@ -1,10 +1,11 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 import {withRouter, RouteComponentProps} from 'react-router-dom';
-import { IonPage, IonButton } from '@ionic/react';
+import firebase from '../config/firebaseConfig';
+import 'firebase/analytics';
+import { IonPage, IonButton, IonAlert } from '@ionic/react';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import firebase from '../config/firebaseConfig';
 import { RootState, Deck, ThunkDispatchType, actions } from '../store';
 import Toolbar from '../components/common/Toolbar';
 import './Home.css';
@@ -22,7 +23,7 @@ const mapStateToProps = (state: RootState): ReduxStateProps => ({
 // Need to define types here because it won't infer properly from ThunkResult right now
 interface ReduxDispatchProps {
   getDeckFromFirebase: (userID: string, deckID: string) => Promise<void>;
-  startGame: (justPlay?: boolean) => Promise<void>;
+  startGame: (startingLife: number, justPlay?: boolean) => Promise<void>;
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatchType): ReduxDispatchProps => bindActionCreators({
@@ -33,6 +34,14 @@ const mapDispatchToProps = (dispatch: ThunkDispatchType): ReduxDispatchProps => 
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps> & RouteComponentProps
 
 const Home = ({ selectedDeck, getDeckFromFirebase, history, startGame}: Props): ReactElement => {
+
+  const [getStartingLife, setGetStartingLife] = useState(false);
+
+  const setStartingLife = (life: number) => {
+    firebase.analytics().logEvent('starting game');
+    startGame(life, true)
+    history.push('/game');
+  }
 
   const scannerOptions: BarcodeScannerOptions = {
     showTorchButton: true,
@@ -48,8 +57,7 @@ const Home = ({ selectedDeck, getDeckFromFirebase, history, startGame}: Props): 
       if (params[1]) {
         getDeckFromFirebase(params[0], params[1])
         .then(() => {
-        startGame();
-        history.push('/game')
+        setGetStartingLife(true);
       })
       }
     })
@@ -57,27 +65,28 @@ const Home = ({ selectedDeck, getDeckFromFirebase, history, startGame}: Props): 
       console.log(error)
     })
   };
-
-  const handleLogout = () => {
-    firebase.auth().signOut()
-  }
-
-  const renderLogoutButton = () => {
-    return (
-      <IonButton onClick={handleLogout}>Logout</IonButton>
-    )
-  }
   
   return (
     <IonPage>
-      <Toolbar rightButtons={renderLogoutButton()}/>
+      <IonAlert isOpen={getStartingLife} 
+        onDidDismiss={blah => setGetStartingLife(false)}
+        inputs={[{name: 'Starting Life',
+                  type: 'number',
+                  value: 20,
+                }]}
+        header='Please Enter Starting Life'
+        buttons={[{text: "OK",
+                   handler: life => setStartingLife(life['Starting Life']) 
+                }]}
+      />
+      <Toolbar rightMenu/>
       <div className="game-container button-page-container">
         <div className="button-container">
           <p className="home-text">Selected Deck: {selectedDeck.name}</p>
           <IonButton className="start-game-button" color="secondary" onClick={openScanner}>
             Scan Deck
           </IonButton>
-          <IonButton className="start-game-button" color="secondary" routerLink="/game" onClick={() => startGame(true)}>
+          <IonButton className="start-game-button" color="secondary" onClick={() => setGetStartingLife(true)}>
             Just Play
           </IonButton>
         </div>

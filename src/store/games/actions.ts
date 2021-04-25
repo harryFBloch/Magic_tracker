@@ -22,9 +22,9 @@ async ( dispatch: ThunkDispatchType): Promise<void> => {
   })
 }
 
-export const startGame = (justPlay = false): ThunkResult<Promise<void>> =>
+export const startGame = (startingLife: number, justPlay = false): ThunkResult<Promise<void>> =>
 async ( dispatch: ThunkDispatchType, getState: () => RootState ): Promise<void> => {
-  dispatch({type: ActionType.START_GAME, deckID: getState().decks.selectedDeck.id, justPlay: justPlay});
+  dispatch({type: ActionType.START_GAME, deckID: getState().decks.selectedDeck.id, justPlay: justPlay, startingLife: startingLife});
 }
 
 const sendGameDataToFirebase = (getState: () => RootState, win: boolean): Promise<void> => {

@@ -57,6 +57,7 @@ export const GameView = (
   useEffect(() => {
     if(currentGame.gameStarted) {
       Insomnia.keepAwake();
+      
     } else  {
       Insomnia.allowSleepAgain();
     }

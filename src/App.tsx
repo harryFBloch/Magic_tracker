@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect } from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, IonContent, setupConfig } from '@ionic/react';
+import { IonApp, IonRouterOutlet, IonContent, setupConfig, isPlatform } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Provider } from 'react-redux';
 import firebase from './config/firebaseConfig';
@@ -16,6 +16,13 @@ import DeckStats from './pages/DeckStats';
 import Onboarding from './pages/Onboarding';
 import AdMobContainer from './components/common/AdMobContainer';
 import InterAd from './components/common/InterAd';
+import RightMenu from './components/RightMenu'
+import LeftMenu from './components/LeftMenu';
+import Username from './pages/Username';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
+import Draft from './pages/Draft';
+import DraftGameView from './pages/DraftGameView';
 
 import store, { actions } from './store';
 import { PrivateRoute, PublicRoute } from './utils/routing';
@@ -40,10 +47,6 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import LeftMenu from './components/LeftMenu';
-import Username from './pages/Username';
-import Privacy from './pages/Privacy';
-import Terms from './pages/Terms';
 
 interface ComponentProps {
   children: Array<ReactElement>;
@@ -53,8 +56,11 @@ const App = (): ReactElement => {
 
   setupConfig({ swipeBackEnabled: false })
 
-  //lock app screen orientation
-  ScreenOrientation.lock(ScreenOrientation.ORIENTATIONS.PORTRAIT);
+  if (isPlatform('mobile')){
+    //lock app screen orientation
+    ScreenOrientation.lock(ScreenOrientation.ORIENTATIONS.PORTRAIT);
+  }
+ 
   
   useEffect((): void => {
     //check auth status
@@ -80,8 +86,10 @@ const App = (): ReactElement => {
           <AdMobContainer />
           <InterAd/>
             <LeftMenu />
+            <RightMenu />
             <IonRouterOutlet draggable={false}>
-              
+              <PrivateRoute component={DraftGameView} path="/draftgame"/>
+              <PrivateRoute component={Draft} path="/draft"/>
               <PrivateRoute component={GameView} path="/game" />
               <PrivateRoute component={Home} path="/home" />
               <PrivateRoute component={Username} path="/username"/>

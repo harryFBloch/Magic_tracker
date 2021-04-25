@@ -2,6 +2,8 @@ import React, { ReactElement, useState } from 'react';
 import { IonPage, IonItem, IonInput, IonContent, IonTextarea, IonButton } from '@ionic/react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import firebase from '../config/firebaseConfig';
+import 'firebase/analytics';
 import { ThunkDispatchType, actions, RootState } from '../store';
 import { Deck } from '../store/decks/types';
 import Toolbar from '../components/common/Toolbar';
@@ -36,10 +38,10 @@ export const AddDeck = ({ addNewDeck, decks }: Props): ReactElement => {
 
   const handleChange = (setAttribute: (newValue: string) => void, value: string) => {
     setAttribute(value)
-    console.log(decks)
   }
 
   const handleAddNewDeck = (): void => {
+    firebase.analytics().logEvent('adding new deck');
     const newDeck: Deck = {name: deckName, 
       description: deckDesc, notes: deckNotes, wins: 0, losses: 0, id: decks.length, gameHistory: []};
     addNewDeck(newDeck)

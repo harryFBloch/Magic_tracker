@@ -1,6 +1,7 @@
 import React, { ReactElement, useState, useEffect } from 'react';
 import classes from './Player.module.css';
 import { createGesture, GestureDetail } from '@ionic/core';
+import { IonButton } from '@ionic/react';
 
 interface Props {
   playerName: string;
@@ -27,9 +28,8 @@ export const Player = ({ playerName, opponent = false , score, setScore, handleG
     }
   }, [animateHealth])
 
-
-  const handleFinishSwipe = (detail: GestureDetail): void => {
-    let addLife = detail.deltaX > 0
+  const handleScore = ( deltaLife: number): void => {
+    let addLife = deltaLife > 0
     let newScore = 0
 
     //health up or down
@@ -50,6 +50,10 @@ export const Player = ({ playerName, opponent = false , score, setScore, handleG
     }
   }
 
+  const handleFinishSwipe = (detail: GestureDetail): void => {
+    handleScore(detail.deltaX);
+  }
+
   if ( container ) {
     const swipe = createGesture({
       el: container,
@@ -58,33 +62,41 @@ export const Player = ({ playerName, opponent = false , score, setScore, handleG
     })
     swipe.enable();
   }
+
+
   
 
   return (
       <div className={`${classes.playerContainer} ${opponent ? classes.flippedPlayer : ''}`} 
       id={`${playerName}-container`}>
-        <div >
-          <div className={classes.playerName}>{playerName}</div>
-          <div className={classes.cloneCircleContainer}>
-            <div className={`${classes.scoreCounter} 
-                ${animateHealth ? classes.circle : ''} ${classes.circleClone}`}
-                style={{animationDelay: '0s'}}/>
+        <div>
+          <div>
+            <div className={classes.playerName}>{playerName}</div>
+              <div className={classes.cloneCircleContainer}>
+                <div className={`${classes.scoreCounter} 
+                    ${animateHealth ? classes.circle : ''} ${classes.circleClone}`}
+                    style={{animationDelay: '0s'}}/>
 
-            <div className={`${classes.scoreCounter} 
-              ${animateHealth ? classes.circle : ''} ${classes.circleClone}`}
-              style={{animationDelay: '1s'}}/>
-            
-            <div className={`${classes.scoreCounter} 
-              ${animateHealth ? classes.circle : ''} ${classes.circleClone}`}
-              style={{animationDelay: '2s'}}/>
-            
-            <div className={`${classes.scoreCounter} 
-              ${animateHealth ? classes.circle : ''} ${classes.circleClone}`}
-              style={{animationDelay: '3s'}}/>
-
+                <div className={`${classes.scoreCounter} 
+                  ${animateHealth ? classes.circle : ''} ${classes.circleClone}`}
+                  style={{animationDelay: '1s'}}/>
+                
+                <div className={`${classes.scoreCounter} 
+                  ${animateHealth ? classes.circle : ''} ${classes.circleClone}`}
+                  style={{animationDelay: '2s'}}/>
+                
+                <div className={`${classes.scoreCounter} 
+                  ${animateHealth ? classes.circle : ''} ${classes.circleClone}`}
+                  style={{animationDelay: '3s'}}/>
+              </div>
+                
+              <div className={`${classes.scoreCounter}`}>
+                <div className={classes.scoreText}>{score}</div>
+            </div>
           </div>
-            <div className={`${classes.scoreCounter}`}>
-              <div className={classes.scoreText}>{score}</div>
+          <div className={classes.buttonContainer}>
+              <IonButton size="large" color="secondary" onClick={() => handleScore(-1)}>-</IonButton>
+              <IonButton size="large" color="secondary" onClick={() => handleScore(1)}>+</IonButton>
           </div>
         </div>
       </div>

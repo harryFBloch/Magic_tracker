@@ -8,9 +8,10 @@ interface Props {
   back?: boolean;
   blank? : boolean;
   rightButtons?: ReactElement;
+  rightMenu?: boolean;
 }
 
-export const Toolbar = ( { back = false, blank = false, rightButtons }: Props): ReactElement => {
+export const Toolbar = ( { back = false, blank = false, rightButtons, rightMenu }: Props): ReactElement => {
 
   return (
     <IonHeader>
@@ -36,6 +37,18 @@ export const Toolbar = ( { back = false, blank = false, rightButtons }: Props): 
         {rightButtons && 
           <IonButtons slot="end">
             {rightButtons}
+          </IonButtons>
+        }
+        {rightMenu && 
+          <IonButtons slot="end">
+            <IonMenuButton autoHide={false} menu="right" className={classes.menuButton}>
+              <svg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512' className={classes.iconColor}>
+                <title>ionicons-v5-f</title>
+                <circle cx='256' cy='256' r='32' style={{fill: 'none', strokeMiterlimit: 10, strokeWidth: '32px'}}/>
+                <circle cx='416' cy='256' r='32' style={{fill: 'none', strokeMiterlimit: 10, strokeWidth: '32px'}}/>
+                <circle cx='96' cy='256' r='32' style={{fill: 'none', strokeMiterlimit: 10, strokeWidth: '32px'}}/>
+              </svg>
+            </IonMenuButton>
           </IonButtons>
         }
       </IonToolbar>

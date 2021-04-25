@@ -1,12 +1,11 @@
 import { ActionType } from "../actionTypes";
 import { Auth } from "./types";
 import { RootAction } from "..";
-import { act } from "@testing-library/react";
 
 const initialState: Auth = {
   uid: "",
   isLoading: true,
-  username: ''
+  username: '',
 };
 
 export default function auth(state=initialState, action: RootAction): typeof initialState  {

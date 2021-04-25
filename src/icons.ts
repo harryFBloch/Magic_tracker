@@ -76,6 +76,11 @@ export const ICONS = {
       {path: 'm405.48 433.081h-298.96a5 5 0 1 0 0 10h298.96a5 5 0 0 0 0-10z',
       color: ICON_COLORS.orange}],
     viewBox: "0 0 512 512"
-  }
+  },
+  TRASH: {
+    paths: [{path: "M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z",
+      color: ICON_COLORS.darkBlue}],
+    viewBox: "0 0 512 512",
+  },
 
 };

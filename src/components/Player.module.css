@@ -40,9 +40,15 @@
     transform:rotate(180deg);
 }
 
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
 .cloneCircleContainer {
   z-index: -1;
 }
+
 
 .circle{
   animation: scaleIn 2s cubic-bezier(.36, .11, .89, .32);
@@ -61,5 +67,12 @@
   to {
     transform: scale(2, 2);
     opacity: 0;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .scoreCounter {
+    width: 200px;
+    height: 200px;
   }
 }

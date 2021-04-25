@@ -33,7 +33,7 @@ export const gameHistoryTemplate: Game[] = [];
 export type GameAction = 
   { type: ActionType.GET_DECK_FROM_FIREBASE, userID: string, deckID: number } | 
   { type: ActionType.GET_OPPONET_DECK_SUCCESS, deck: Deck, opponentUID: string , opponentUsername: string} |
-  { type: ActionType.START_GAME, deckID: number , justPlay: boolean} |
+  { type: ActionType.START_GAME, deckID: number , justPlay: boolean, startingLife: number} |
   { type: ActionType.GAME_OVER, win: boolean } | 
   { type: ActionType.SET_SCORE, opponent: boolean, newScore: number} | 
   { type: ActionType.SET_GAME_HISTORY, gameHistory: Game[]} | 

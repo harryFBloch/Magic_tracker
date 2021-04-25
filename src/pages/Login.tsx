@@ -1,5 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 import {withRouter, RouteComponentProps} from 'react-router-dom';
+import firebase from '../config/firebaseConfig';
+import 'firebase/analytics';
 import { connect } from 'react-redux';
 import {
   IonInput,
@@ -12,6 +14,7 @@ import {
 import classes from './Login.module.css'
 import { ThunkDispatchType, actions } from '../store';
 import { bindActionCreators } from 'redux';
+
 
 interface ReduxDispatchProps {
   login: (email: string, password: string) => Promise<void>;
@@ -36,6 +39,7 @@ export const Login = ({history, login, signUp, resetPassword}: RouteComponentPro
 
 
   const handleSignUp = (): void => {
+    firebase.analytics().logEvent('sign up attempt')
     if (password === password2) {
       signUp(email, password)
       .then((): void => {
@@ -65,15 +69,12 @@ export const Login = ({history, login, signUp, resetPassword}: RouteComponentPro
   }
 
   const renderLogin = (): ReactElement => {
+    firebase.analytics().logEvent('render login')
     return (
       <>
         <div className={classes.centerContainer}>
         <IonLabel color="primary" className={classes.title}>
-          Login or&nbsp;
-          <span className={classes.linkStyle} onClick={(): void => {
-            setLoginMode(false);
-            setErrorMessage('');
-            }}>Sign up!</span>
+          Login
         </IonLabel>
         </div>
         <IonItem className={classes.inputItem}>
@@ -88,6 +89,7 @@ export const Login = ({history, login, signUp, resetPassword}: RouteComponentPro
         <div className={`${classes.centerContainer} ${classes.topPadding}`}>
           <div>
             <div className={classes.buttonContainer}>
+              <IonButton onClick={() => setLoginMode(false)} className={classes.title}>Sign Up</IonButton>
               <IonButton onClick={handleLogin} className={classes.title}>Log In</IonButton>
             </div>
             
